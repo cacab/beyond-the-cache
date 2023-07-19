@@ -56,9 +56,25 @@ Next, use [INCRBY](https://redis.io/commands/incrby/) and [DECRBY](https://redis
 ## 📍 Figure It Out ##
 
 - What happens when you increment or decrement a String that isn't there?
+
+```
+127.0.0.1:6379> DECRBY nottheresightings:count 20
+(integer) -20
+```
 - What about a String that doesn't contain a number?
+
+```
+127.0.0.1:6379> SET nocountsightings:count
+(error) ERR wrong number of arguments for 'set' command
+```
 - What happens when you give INCRBY and DECRBY negative numbers?
 
+```
+127.0.0.1:6379> SET neg_num:count -20
+OK
+127.0.0.1:6379> INCR  neg_num:count
+(integer) -19
+```
 ----------------------------------------
 
 Before we explore the next data structure, let's learn some of the commands for [manipulating keys](04-REDIS-KEYS.md) in Redis.
