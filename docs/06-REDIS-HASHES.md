@@ -72,9 +72,37 @@ And, of course, you need to be able to delete things. You can do this with the [
 ## 📍 Figure It Out ##
 
 - What happens when you remove an item that's not in the Hash?
-- What happens when you remove all the items from a Hash?
-- Look at the [Hash commands](https://redis.io/commands/?group=hash). How would you get the field names of a Hash? The length?
+```
+127.0.0.1:6379> HDEL bigfoot:sighting:1234 foo bar
+(integer) 0
+```
 
+- What happens when you remove all the items from a Hash?
+```
+127.0.0.1:6379> HGETALL bigfoot:sighting:2222
+1) "text"
+2) "I saw Bigfoot buying shoes at Walmart. Turns out, he wears a size 27."
+127.0.0.1:6379> HDEL  bigfoot:sighting:2222 text
+(integer) 1
+127.0.0.1:6379> HGETALL bigfoot:sighting:2222
+(empty array)
+
+```
+
+- Look at the [Hash commands](https://redis.io/commands/?group=hash). How would you get the field names of a Hash? The length?
+```
+127.0.0.1:6379> HKEYS  bigfoot:sighting:1234
+1) "class"
+2) "views"
+3) "text"
+```
+
+length:
+
+```
+127.0.0.1:6379> HLEN  bigfoot:sighting:1234
+(integer) 3
+```
 ----------------------------------------
 
 Hashes down. Let's take a look at [Sets](07-REDIS-SETS.md).

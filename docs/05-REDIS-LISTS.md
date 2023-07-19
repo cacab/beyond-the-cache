@@ -62,10 +62,45 @@ You can even pop from one list and push to another using [LMOVE](https://redis.i
 ## 📍 Figure It Out ##
 
 - What happens when you remove all the items from a List?
+```
+127.0.0.1:6379> LINDEX bigfoot:sightings:reported 1
+(nil)
+```
+
 - How could you get all the values in a List?
+```
+127.0.0.1:6379> LRANGE bigfoot:sightings:reported 0 2
+1) "My grandpa told me about this time he saw Bigfoot when he was a kid in Kentucky"
+2) "I saw Bigfoot out by the Walmart"
+```
+
+```
+127.0.0.1:6379>  LRANGE bigfoot:sightings:reported 0 -1
+1) "My grandpa told me about this time he saw Bigfoot when he was a kid in Kentucky"
+2) "I saw Bigfoot out by the Walmart"
+```
+
 - When using LRANGE, happens when indices are out of range?
+```
+127.0.0.1:6379> LRANGE bigfoot:sightings:reported 0 4
+1) "My grandpa told me about this time he saw Bigfoot when he was a kid in Kentucky"
+2) "I saw Bigfoot out by the Walmart"
+3) "I heard Bigfoot behind the trailer digging through some trash cans"
+```
+
 - What happens when you RPOP or LPOP from an empty List?
+```
+127.0.0.1:6379> LPOP bigfoot:sightings:reported
+(nil)
+```
+
+
 - What happens if you set the source and destination of LMOVE to the same List?
+```
+127.0.0.1:6379>  LMOVE bigfoot:sightings:reported bigfoot:sightings:reported RIGHT LEFT
+"I saw Bigfoot out by the Walmart"
+```
+
 
 ----------------------------------------
 

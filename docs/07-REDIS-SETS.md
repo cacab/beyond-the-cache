@@ -65,10 +65,30 @@ If you have more than one Set, you can get the difference, intersection, or unio
 ## 📍 Figure It Out ##
 
 - What happens when you add a member that's already in a Set?
+```
+127.0.0.1:6379> SADD states Ohio
+(integer) 0
+```
 - What happens when you remove a member that's not in a Set?
+```
+127.0.0.1:6379> SREM states foo
+(integer) 0
+```
 - What happens when you check the cardinality of a Set that's not defined in Redis?
-- What happens when you flip the order of the arguments in SDIFF?
+```
+127.0.0.1:6379> SCARD foo
+(integer) 0
+```
 
+- What happens when you flip the order of the arguments in SDIFF?
+```
+127.0.0.1:6379> SDIFF midwest:states eastern:states
+1) "Indiana"
+2) "Michigan"
+127.0.0.1:6379> SDIFF eastern:states  midwest:states
+1) "Maryland"
+2) "Pennsylvania"
+```
 ----------------------------------------
 
 Now that you've tried out some of the most common data structures in Redis, it's time to write some code using Node Redis. We'll start by [setting up a simple API](08-API-SETUP.md) using Express.
