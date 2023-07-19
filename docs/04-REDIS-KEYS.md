@@ -40,9 +40,28 @@ OK
 ## 📍 Figure It Out ##
 
 - What happens when you DEL or UNLINK a key that isn't there?
+```
+127.0.0.1:6379> DEL motd_not_there
+(integer) 0
+```
+
 - What happens when you EXPIRE a missing key?
+```
+127.0.0.1:6379> EXPIRE motd_not_there 3
+(integer) 0
+```
+
 - What happens when you ask for the TTL on a non-EXPIREd key?
+```
+127.0.0.1:6379> TTL sightings:count
+(integer) -1
+```
+
 - What happens when you ask for the TTL on a key that no longer exists?
+```
+127.0.0.1:6379> TTL bigfoot
+(integer) -2
+```
 
 ----------------------------------------
 
